@@ -41,7 +41,10 @@ function useCamera(): {
         canvas.height = video.videoHeight;
 
         if (canvasContext) {
+          // NOTE - camera mirror, using -1 in X axis to flip.
+          // also using canvas.width so that camera area will be present in the visible area
           canvasContext.setTransform(-1, 0, 0, 1, canvas.width, 0);
+
           // NOTE - drawing the video to the canvas
           canvasContext.drawImage(video, 0, 0, canvas.width, canvas.height);
         }
@@ -144,6 +147,10 @@ function useCamera(): {
 
       // NOTE - trying to get latest frame from video
       canvasContext?.drawImage(videoElement, 0, 0, canvasWidth, canvasHeight);
+
+      // NOTE - resetting camera mirroring by using default coordinate values so that
+      // captured image will not be flipped
+      canvasContext.setTransform(1, 0, 0, 1, 0, 0);
 
       // NOTE - getting image data from canvas
       const canvasImgData = canvasRef.current?.toDataURL('image/png');
