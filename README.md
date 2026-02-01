@@ -99,6 +99,8 @@ Camera Access + Streaming Feed + Capture research links -
   https://jsfiddle.net/Xw29r/
 - Take snapshot - https://www.youtube.com/watch?v=itMi2fz-CvE
   And upload to canvas - https://stackoverflow.com/questions/4773966/drawing-an-image-from-a-data-url-to-a-canvas
+- Camera mirroring - https://stackoverflow.com/questions/50681592/getusermedia-mirror-image-instead-of-flip
+  https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform
 
 Captcha problem solve research links -
 

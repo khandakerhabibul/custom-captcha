@@ -41,6 +41,7 @@ function useCamera(): {
         canvas.height = video.videoHeight;
 
         if (canvasContext) {
+          canvasContext.setTransform(-1, 0, 0, 1, canvas.width, 0);
           // NOTE - drawing the video to the canvas
           canvasContext.drawImage(video, 0, 0, canvas.width, canvas.height);
         }
