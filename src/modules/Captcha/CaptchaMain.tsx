@@ -115,21 +115,25 @@ function CaptchaMain() {
 
   // NOTE - default screen for captcah validation
   return (
-    <div className='w-full h-screen flex justify-center items-center'>
+    <div className='w-full h-screen flex justify-center items-center px-4'>
       <div
-        className='p-10 flex flex-col gap-10 justify-center items-center 
-        backdrop-blur-[5px]
-      bg-white/10
-        border border-white/20
-        rounded-2xl
-        shadow-2xl w-[70%]
-      '
+        className='
+          p-4 md:p-6
+          flex flex-col justify-center items-center gap-6 
+          backdrop-blur-[5px] bg-white/10
+          border border-white/20 rounded-2xl
+          w-full sm:w-[90%] md:w-[75%] lg:w-[70%]
+          max-w-4xl
+        '
       >
-        <div className='min-h-20 flex flex-col gap-4'>
-          <h1 className='text-3xl'>Captcha Validation</h1>
+        <div className='min-h-20 flex flex-col gap-3 text-center'>
+          <h1 className='text-xl sm:text-2xl md:text-3xl font-semibold'>
+            Captcha Validation
+          </h1>
+
           {targettedBoxesShapeColor?.type &&
             targettedBoxesShapeColor?.color && (
-              <h4>
+              <h4 className='text-sm sm:text-base'>
                 Please select {targettedBoxesShapeColor?.type} with{' '}
                 <span style={{ color: targettedBoxesShapeColor?.color }}>
                   {targettedBoxesShapeColor?.color}
@@ -139,7 +143,7 @@ function CaptchaMain() {
             )}
         </div>
 
-        {/* NOTE - camera feed */}
+        {/* NOTE - hidden video element, using it to stream camera data into canvas */}
         <video
           ref={(element) => {
             setVideoElement(element);
@@ -154,7 +158,13 @@ function CaptchaMain() {
             <div>{cameraError}</div>
           ) : (
             <>
-              <div ref={containerRef} className='w-112.5 relative'>
+              <div
+                ref={containerRef}
+                className='
+                  relative w-full max-w-90 sm:max-w-105 md:max-w-120
+                '
+              >
+                {/* NOTE - camera feed */}
                 <canvas ref={canvasRef} className='w-full h-full rounded-md' />
 
                 <CaptchaContent
@@ -171,7 +181,11 @@ function CaptchaMain() {
                   onClick={
                     isCameraStreamActive ? handleContinue : handleValidatePuzzle
                   }
-                  className='w-auto bg-blue-500 px-4 py-2 cursor-pointer rounded-sm'
+                  className='
+                    w-auto bg-blue-500 hover:bg-blue-600 
+                    px-4 py-2 md:px-6 md:py-3 text-white text-sm sm:text-base 
+                    cursor-pointer rounded-md transition
+                  '
                 >
                   {isCameraStreamActive ? 'Continue' : 'Validate'}
                 </button>
@@ -185,8 +199,8 @@ function CaptchaMain() {
         )}
 
         {captchaErrorCount > 0 && (
-          <div>
-            <h3 className='text-lg text-red-500'>
+          <div className='text-center'>
+            <h3 className='text-sm sm:text-base text-red-500'>
               You have made {captchaErrorCount} error, you have{' '}
               {CAPTCHA_MAX_ERROR_LIMIT - captchaErrorCount} attempts left
             </h3>
